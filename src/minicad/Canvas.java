@@ -8,16 +8,17 @@ import minicad.shapes.Square;
 import minicad.shapes.Polygon;
 import minicad.shapes.Rectangle;
 
-
-import java.awt.Color;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Queue;
 
 public final class Canvas implements Drawing {
     private int width = 0, height = 0;
     private BufferedImage surface = null;
+    private ArrayList<Shape> shapes = null;
 
     public Canvas(final int width, final int height, final String color, final int alpha) {
         initCanvas(width, height, color, alpha);
@@ -41,21 +42,16 @@ public final class Canvas implements Drawing {
                             final String color, final int alpha) {
         width = newWidth;
         height = newHeight;
+
         surface = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        shapes = new ArrayList<Shape>();
 
         floodFill(new Point(Math.round(height / 2), Math.round(width / 2)),
-                Canvas.getColor(color, alpha));
+                Utils.getColor(color, alpha));
     }
 
     public BufferedImage getSurface() {
         return surface;
-    }
-
-    private static int getColor(final String hex, final int alpha) {
-        Color opaque = Color.decode(hex);
-
-        return new Color(opaque.getRed(), opaque.getGreen(), opaque.getBlue(),
-            alpha).getRGB();
     }
 
     private boolean isOutOfBounds(final Point pos) {
@@ -103,19 +99,97 @@ public final class Canvas implements Drawing {
         return true;
     }
 
+    public void addShape(final Shape shape) {
+        shapes.add(shape);
+    }
+
     @Override
     public void draw(final Line shape) {
+        Point start = shape.getStart();
+        Point stop = shape.getStop();
 
+        Point current = new Point(start);
+
+        int deltaX = Math.abs(stop.x - start.x);
+        int deltaY = Math.abs(stop.y - start.y);
+        int sign1 = Integer.signum(stop.x - start.x);
+        int sign2 = Integer.signum(stop.y - start.y);
+
+        boolean interchanged = false;
+        if (deltaY > deltaX) {
+            deltaX += deltaY;
+            deltaY = deltaX - deltaY;
+            deltaX = deltaX - deltaY;
+            interchanged = true;
+        }
+
+        int error = 2 * deltaY - deltaX;
+        for (int i = 0; i < deltaX; i++) {
+            if (!isOutOfBounds(current)) {
+                surface.setRGB(current.x, current.y, shape.getColor());
+            }
+
+            while (error > 0) {
+                if (interchanged) {
+                    current.setLocation(current.x + sign1, current.y);
+                } else {
+                    current.setLocation(current.x, current.y + sign2);
+                }
+
+                error -= 2 * deltaX;
+            }
+
+            if (interchanged) {
+                current.setLocation(current.x, current.y + sign2);
+            } else {
+                current.setLocation(current.x + sign1, current.y);
+            }
+
+            error += 2 * deltaY;
+        }
     }
 
     @Override
     public void draw(final Square shape) {
+        Point start = new Point(shape.getStart());
 
+        ShapeGenerator.getInstance()
+                .generate("RECTANGLE"
+                    + " " + start.x + " " + start.y
+                    + " " + shape.getSize() + " " + shape.getSize()
+                    + " " + Utils.getHexAndAlpha(shape.getBorderColor())
+                    + " " + Utils.getHexAndAlpha(shape.getFillColor())).accept(this);
     }
 
     @Override
     public void draw(final Rectangle shape) {
+        Point cornerNW = new Point(shape.getStart());
+        Point cornerNE = new Point(cornerNW.x + shape.getWidth(), cornerNW.y);
+        Point cornerSW = new Point(cornerNW.x, cornerNW.y + shape.getHeight());
+        Point cornerSE = new Point(cornerNE.x, cornerSW.y);
 
+        ShapeGenerator.getInstance()
+                .generate("LINE"
+                        + " " + cornerNW.x + " " + cornerNW.y
+                        + " " + cornerNE.x + " " + cornerNE.y
+                        + " " + Utils.getHexAndAlpha(shape.getBorderColor())).accept(this);
+        ShapeGenerator.getInstance()
+                .generate("LINE"
+                        + " " + cornerSW.x + " " + cornerSW.y
+                        + " " + cornerSE.x + " " + cornerSE.y
+                        + " " + Utils.getHexAndAlpha(shape.getBorderColor())).accept(this);
+        ShapeGenerator.getInstance()
+                .generate("LINE"
+                        + " " + cornerNW.x + " " + cornerNW.y
+                        + " " + cornerSW.x + " " + cornerSW.y
+                        + " " + Utils.getHexAndAlpha(shape.getBorderColor())).accept(this);
+        ShapeGenerator.getInstance()
+                .generate("LINE"
+                        + " " + cornerNE.x + " " + cornerNE.y
+                        + " " + cornerSE.x + " " + cornerSE.y
+                        + " " + Utils.getHexAndAlpha(shape.getBorderColor())).accept(this);
+
+        floodFill(shape.getCenter(width, height), shape.getFillColor());
     }
 
     @Override
@@ -136,5 +210,12 @@ public final class Canvas implements Drawing {
     @Override
     public void draw(final Polygon shape) {
 
+    }
+
+    public void drawAll() {
+        ListIterator<Shape> iterator = shapes.listIterator();
+        while (iterator.hasNext()) {
+            iterator.next().accept(this);
+        }
     }
 }
