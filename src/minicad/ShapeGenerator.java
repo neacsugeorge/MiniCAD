@@ -26,10 +26,10 @@ public final class ShapeGenerator {
 
         Shape shape = null;
 
-        List detailsToPass = new LinkedList();
+        List<String> detailsToPass = new LinkedList<>();
         Collections.addAll(detailsToPass, details);
         detailsToPass.remove(0);
-        details = (String[]) detailsToPass.toArray(new String[detailsToPass.size()]);
+        details = detailsToPass.toArray(new String[detailsToPass.size()]);
 
         try {
             Constructor<?> constructor = Class.forName(shapeType).getConstructor(String[].class);
@@ -42,7 +42,7 @@ public final class ShapeGenerator {
             e.printStackTrace();
         }
 
-        System.out.println(shapeType + " " + shape);
+//        System.out.println(shapeType + " " + shape);
 
         return shape;
     }

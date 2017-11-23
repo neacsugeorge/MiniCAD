@@ -12,13 +12,15 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.ListIterator;
 import java.util.Queue;
 
 public final class Canvas implements Drawing {
     private int width = 0, height = 0;
     private BufferedImage surface = null;
+    private BufferedImage fillSurface = null;
     private ArrayList<Shape> shapes = null;
+
+    private int count = 0;
 
     public Canvas(final int width, final int height, final String color, final int alpha) {
         initCanvas(width, height, color, alpha);
@@ -28,7 +30,7 @@ public final class Canvas implements Drawing {
     private static final int WIDTH = 2;
     private static final int COLOR = 3;
     private static final int ALPHA = 4;
-    Canvas(final String canvasDetails) {
+    public Canvas(final String canvasDetails) {
         String[] parts = canvasDetails.split(" ");
         initCanvas(
                 Integer.parseInt(parts[WIDTH]),
@@ -44,7 +46,8 @@ public final class Canvas implements Drawing {
         height = newHeight;
 
         surface = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        shapes = new ArrayList<Shape>();
+        fillSurface = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        shapes = new ArrayList<>();
 
         floodFill(new Point(Math.round(height / 2), Math.round(width / 2)),
                 Utils.getColor(color, alpha));
@@ -69,7 +72,7 @@ public final class Canvas implements Drawing {
         Queue<Point> fillQueue = new LinkedList<>();
         boolean[][] painted = new boolean[height][width];
 
-        int target = surface.getRGB(start.x, start.y);
+        int target = fillSurface.getRGB(start.x, start.y);
         fillQueue.add(start);
 
         while (!fillQueue.isEmpty()) {
@@ -89,11 +92,12 @@ public final class Canvas implements Drawing {
         if (isOutOfBounds(pos)
             || painted[pos.y][pos.x]
             || target == color
-            || surface.getRGB(pos.x, pos.y) != target) {
+            || fillSurface.getRGB(pos.x, pos.y) != target) {
             return false;
         }
 
 
+        fillSurface.setRGB(pos.x, pos.y, color);
         surface.setRGB(pos.x, pos.y, color);
         painted[pos.y][pos.x] = true;
         return true;
@@ -124,9 +128,10 @@ public final class Canvas implements Drawing {
         }
 
         int error = 2 * deltaY - deltaX;
-        for (int i = 0; i < deltaX; i++) {
+        for (int i = 0; i <= deltaX; i++) {
             if (!isOutOfBounds(current)) {
                 surface.setRGB(current.x, current.y, shape.getColor());
+                fillSurface.setRGB(current.x, current.y, shape.getColor());
             }
 
             while (error > 0) {
@@ -163,9 +168,11 @@ public final class Canvas implements Drawing {
 
     @Override
     public void draw(final Rectangle shape) {
+        fillSurface = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
         Point cornerNW = new Point(shape.getStart());
-        Point cornerNE = new Point(cornerNW.x + shape.getWidth(), cornerNW.y);
-        Point cornerSW = new Point(cornerNW.x, cornerNW.y + shape.getHeight());
+        Point cornerNE = new Point(cornerNW.x + shape.getWidth() - 1, cornerNW.y);
+        Point cornerSW = new Point(cornerNW.x, cornerNW.y + shape.getHeight() - 1);
         Point cornerSE = new Point(cornerNE.x, cornerSW.y);
 
         ShapeGenerator.getInstance()
@@ -213,9 +220,8 @@ public final class Canvas implements Drawing {
     }
 
     public void drawAll() {
-        ListIterator<Shape> iterator = shapes.listIterator();
-        while (iterator.hasNext()) {
-            iterator.next().accept(this);
+        for (Shape shape : shapes) {
+            shape.accept(this);
         }
     }
 }

@@ -16,10 +16,28 @@ public final class Utils {
 
     public static String getHexAndAlpha(final int color) {
         Color rgba = new Color(color, true);
+        StringBuilder result = new StringBuilder("#");
 
-        return "#" + Integer.toHexString(rgba.getRed())
-                + Integer.toHexString(rgba.getGreen())
-                + Integer.toHexString(rgba.getBlue())
-                + " " + rgba.getAlpha();
+        String red = Integer.toHexString(rgba.getRed()),
+                green = Integer.toHexString(rgba.getGreen()),
+                blue = Integer.toHexString(rgba.getBlue());
+
+        if (red.length() < 2) {
+            red = "0" + red;
+        }
+        if (green.length() < 2) {
+            green = "0" + green;
+        }
+        if (blue.length() < 2) {
+            blue = "0" + blue;
+        }
+
+        result.append(red);
+        result.append(green);
+        result.append(blue);
+        result.append(" ");
+        result.append(rgba.getAlpha());
+
+        return result.toString();
     }
 }

@@ -57,7 +57,7 @@ public final class Rectangle implements Shape {
         Point position = new Point(start);
 
         int newX = position.x + (width - 2) / 2;
-        int newY = position.y + (width - 2) / 2;
+        int newY = position.y + (height - 2) / 2;
 
         if (newX > canvasWidth) {
             newX = canvasWidth;
@@ -69,12 +69,12 @@ public final class Rectangle implements Shape {
         int drawnRectangleWidth = newX - position.x;
         int drawnRectangleHeight = newY - position.y;
 
-        System.out.println(new Point(newX, newY));
+//        System.out.println(start);
         position.setLocation(
                 position.x + (drawnRectangleWidth - 2) / 2,
                 position.y + (drawnRectangleHeight - 2) / 2
         );
-        System.out.println(position);
+//        System.out.println(position);
 
         return position;
     }
@@ -82,5 +82,12 @@ public final class Rectangle implements Shape {
     @Override
     public void accept(final Drawing drawing) {
         drawing.draw(this);
+    }
+
+    public String toString() {
+        return "RECTANGLE" + " " + start.x + " " + start.y
+                + " " + height + " " + width
+                + " " + Utils.getHexAndAlpha(borderColor)
+                + " " + Utils.getHexAndAlpha(fillColor);
     }
 }
