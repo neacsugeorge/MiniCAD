@@ -1,6 +1,10 @@
 package minicad;
 
+import javax.imageio.ImageIO;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public final class Utils {
     private Utils() {
@@ -39,5 +43,14 @@ public final class Utils {
         result.append(rgba.getAlpha());
 
         return result.toString();
+    }
+
+    public static void print(final BufferedImage surface) {
+        File outputFile = new File("debug.png");
+        try {
+            ImageIO.write(surface, "png", outputFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

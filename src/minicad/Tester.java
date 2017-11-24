@@ -13,8 +13,7 @@ public final class Tester {
 
         //Canvas canvas = new Canvas("CANVAS 500 500 #3E9070 100");
         Canvas canvas = new Canvas("CANVAS 481 487 #3E9070 100");
-        canvas.addShape(generator.generate("RECTANGLE 371 198 644 113 #65F137 100 #C6BDF3 100"));
-        canvas.addShape(generator.generate("SQUARE 73 218 347 #C0EFDD 100 #F42280 100"));
+        canvas.addShape(generator.generate("CIRCLE 200 200 50 #0000FF 255 #FF0000 100"));
         //canvas.addShape(generator.generate("SQUARE 50 50 400 #C0EFDD 100 #F42280 100"));
 
         canvas.drawAll();

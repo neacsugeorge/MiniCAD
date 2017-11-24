@@ -20,8 +20,6 @@ public final class Canvas implements Drawing {
     private BufferedImage fillSurface = null;
     private ArrayList<Shape> shapes = null;
 
-    private int count = 0;
-
     public Canvas(final int width, final int height, final String color, final int alpha) {
         initCanvas(width, height, color, alpha);
     }
@@ -201,7 +199,66 @@ public final class Canvas implements Drawing {
 
     @Override
     public void draw(final Circle shape) {
+        fillSurface = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Point current = new Point(shape.getStart());
 
+        int radius = shape.getRadius();
+
+        int x = radius;
+        int y = 0;
+
+        Queue<Point> points = new LinkedList<>();
+        points.add(new Point(current.x + x, current.y + y));
+
+        points.add(new Point(current.x, current.y - x));
+        points.add(new Point(current.x - x, current.y));
+
+        if (radius > 0) {
+            points.add(new Point(current.x + x, current.y - y));
+            points.add(new Point(current.y + y, current.x + x));
+            points.add(new Point(current.y - y, current.x + x));
+        }
+
+        int p = 1 - radius;
+
+        while (x > y) {
+            y++;
+
+            if (p <= 0) {
+                p = p + 2 * y + 1;
+            } else {
+                x--;
+                p = p + 2 * y - 2 * x + 1;
+            }
+
+            if (x < y) {
+                break;
+            }
+
+            points.add(new Point(current.x + x, current.y + y));
+            points.add(new Point(current.x - x, current.y + y));
+            points.add(new Point(current.x + x, current.y - y));
+            points.add(new Point(current.x - x, current.y - y));
+
+            if (x != y) {
+                points.add(new Point(current.y + y, current.x + x));
+                points.add(new Point(current.y - y, current.x + x));
+                points.add(new Point(current.y + y, current.x - x));
+                points.add(new Point(current.y - y, current.x - x));
+            }
+        }
+
+        while (!points.isEmpty()) {
+            Point toPaint = points.remove();
+            if (isOutOfBounds(toPaint)) {
+                continue;
+            }
+
+            surface.setRGB(toPaint.x, toPaint.y, shape.getBorderColor());
+            fillSurface.setRGB(toPaint.x, toPaint.y, shape.getBorderColor());
+        }
+
+        floodFill(current, shape.getFillColor());
     }
 
     @Override
