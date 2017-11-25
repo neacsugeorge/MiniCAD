@@ -121,7 +121,7 @@ public final class Canvas implements Drawing {
 
         boolean interchanged = false;
         if (deltaY > deltaX) {
-            deltaX += deltaY;
+            deltaX = deltaX + deltaY;
             deltaY = deltaX - deltaY;
             deltaX = deltaX - deltaY;
             interchanged = true;
@@ -214,6 +214,10 @@ public final class Canvas implements Drawing {
         points.add(new Point(pos.x - y, pos.y - x));
     }
 
+    private static final int THREE = 3;
+    private static final int FOUR = 4;
+    private static final int SIX = 6;
+    private static final int TEN = 10;
     @Override
     public void draw(final Circle shape) {
         fillSurface = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -222,7 +226,7 @@ public final class Canvas implements Drawing {
 
         int radius = shape.getRadius();
         int x = 0, y = radius;
-        int d = 3 - 2 * radius;
+        int d = THREE - 2 * radius;
 
         while (y >= x) {
             drawCircleHelper(points, current, x, y);
@@ -230,9 +234,9 @@ public final class Canvas implements Drawing {
 
             if (d > 0) {
                 y--;
-                d = d + 4 * (x - y) + 10;
+                d = d + FOUR * (x - y) + TEN;
             } else {
-                d = d + 4 * x + 6;
+                d = d + FOUR * x + SIX;
             }
 
             drawCircleHelper(points, current, x, y);
@@ -253,17 +257,51 @@ public final class Canvas implements Drawing {
 
     @Override
     public void draw(final Triangle shape) {
-
+        ShapeGenerator.getInstance()
+            .generate(shape.toString().replace("TRIANGLE", "POLYGON 3"))
+                .accept(this);
     }
 
     @Override
     public void draw(final Diamond shape) {
+        Point start = new Point(shape.getStart());
+        int horizontal = shape.getHorizontalDiagonal() / 2;
+        int vertical = shape.getVerticalDiagonal() / 2;
+
+        Point north = new Point(start.x, start.y - vertical);
+        Point east = new Point(start.x + horizontal, start.y);
+        Point south = new Point(start.x, start.y + vertical);
+        Point west = new Point(start.x - horizontal, start.y);
+
+        ShapeGenerator.getInstance()
+            .generate("POLYGON 4"
+                + " " + north.x + " " + north.y
+                + " " + east.x + " " + east.y
+                + " " + south.x + " " + south.y
+                + " " + west.x + " " + west.y
+                + " " + Utils.getHexAndAlpha(shape.getBorderColor())
+                + " " + Utils.getHexAndAlpha(shape.getFillColor())).accept(this);
 
     }
 
     @Override
     public void draw(final Polygon shape) {
+        fillSurface = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        ArrayList<Point> points = shape.getPoints();
 
+        int numPoints = points.size();
+        for (int i = 0; i < numPoints; i++) {
+            Point first, second;
+            first = points.get(i);
+            second = points.get((i + 1) % numPoints);
+
+            ShapeGenerator.getInstance()
+                .generate("LINE " + first.x + " " + first.y
+                        + " " + second.x + " " + second.y
+                        + " " + Utils.getHexAndAlpha(shape.getBorderColor())).accept(this);
+        }
+
+        floodFill(Utils.getCentroid(points), shape.getFillColor());
     }
 
     public void drawAll() {
