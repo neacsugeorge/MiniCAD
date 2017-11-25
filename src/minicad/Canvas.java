@@ -276,9 +276,9 @@ public final class Canvas implements Drawing {
         ShapeGenerator.getInstance()
             .generate("POLYGON 4"
                 + " " + north.x + " " + north.y
-                + " " + east.x + " " + east.y
-                + " " + south.x + " " + south.y
                 + " " + west.x + " " + west.y
+                + " " + south.x + " " + south.y
+                + " " + east.x + " " + east.y
                 + " " + Utils.getHexAndAlpha(shape.getBorderColor())
                 + " " + Utils.getHexAndAlpha(shape.getFillColor())).accept(this);
 

@@ -13,7 +13,7 @@ public final class Main {
 
     public static void main(final String[] args) {
         String inputFilePath = args[0];
-//        String inputFilePath = "/home/george/Work/POO/teme/tema2/checker/input/test25.in";
+//        String inputFilePath = "/home/george/Work/POO/teme/tema2/checker/input/test36.in";
         File inputFile = new File(inputFilePath);
         Scanner scanner;
 

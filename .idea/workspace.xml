@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b13b1b67-a098-4465-9c5e-d798a7cddaea" name="Default" comment="Passed 39/40 tests. Working Triangle, Diamond &amp; Polygon">
+    <list default="true" id="b13b1b67-a098-4465-9c5e-d798a7cddaea" name="Default" comment="Passed all tests. Diamond should be drawn anti clockwise">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/minicad/Canvas.java" afterPath="$PROJECT_DIR$/src/minicad/Canvas.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/minicad/Tester.java" afterPath="$PROJECT_DIR$/src/minicad/Tester.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/minicad/Utils.java" afterPath="$PROJECT_DIR$/src/minicad/Utils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/minicad/shapes/Diamond.java" afterPath="$PROJECT_DIR$/src/minicad/shapes/Diamond.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/minicad/shapes/Polygon.java" afterPath="$PROJECT_DIR$/src/minicad/shapes/Polygon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/minicad/shapes/Triangle.java" afterPath="$PROJECT_DIR$/src/minicad/shapes/Triangle.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,11 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Canvas.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Canvas.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/minicad/Canvas.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="63" column="24" lean-forward="false" selection-start-line="63" selection-start-column="15" selection-end-line="63" selection-end-column="24" />
+            <state relative-caret-position="437">
+              <caret line="280" column="43" lean-forward="false" selection-start-line="280" selection-start-column="43" selection-end-line="280" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -113,11 +109,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="16" column="41" lean-forward="false" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+            <state relative-caret-position="270">
+              <caret line="16" column="39" lean-forward="true" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -161,13 +157,13 @@
         <option value="$PROJECT_DIR$/src/minicad/shapes/Rectangle.java" />
         <option value="$PROJECT_DIR$/src/minicad/ShapeGenerator.java" />
         <option value="$PROJECT_DIR$/src/minicad/shapes/Circle.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/minicad/shapes/Polygon.java" />
         <option value="$PROJECT_DIR$/src/minicad/shapes/Triangle.java" />
         <option value="$PROJECT_DIR$/src/minicad/shapes/Diamond.java" />
         <option value="$PROJECT_DIR$/src/minicad/Utils.java" />
         <option value="$PROJECT_DIR$/src/minicad/Tester.java" />
         <option value="$PROJECT_DIR$/src/minicad/Canvas.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
       </list>
     </option>
   </component>
@@ -260,7 +256,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Tester">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -381,8 +377,8 @@
     </list>
     <recent_temporary>
       <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Application.Tester" />
-        <item index="1" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Tester" />
       </list>
     </recent_temporary>
   </component>
@@ -407,7 +403,7 @@
       <workItem from="1511374539127" duration="724000" />
       <workItem from="1511375994727" duration="15268000" />
       <workItem from="1511398210657" duration="28266000" />
-      <workItem from="1511554788956" duration="18514000" />
+      <workItem from="1511554788956" duration="19169000" />
     </task>
     <task id="LOCAL-00001" summary="Init basic canvas with color">
       <created>1511397307794</created>
@@ -451,11 +447,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511614861768</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Passed 39/40 tests. Working Triangle, Diamond &amp; Polygon">
+      <created>1511629820562</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1511629820562</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70130000" />
+    <option name="totallyTimeSpent" value="70785000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="16" y="-6" width="1920" height="1061" extended-state="6" />
@@ -507,7 +510,8 @@
     <MESSAGE value="Drawing circles, tests still failing" />
     <MESSAGE value="Passed the tests for circle" />
     <MESSAGE value="Passed 39/40 tests. Working Triangle, Diamond &amp; Polygon" />
-    <option name="LAST_COMMIT_MESSAGE" value="Passed 39/40 tests. Working Triangle, Diamond &amp; Polygon" />
+    <MESSAGE value="Passed all tests. Diamond should be drawn anti clockwise" />
+    <option name="LAST_COMMIT_MESSAGE" value="Passed all tests. Diamond should be drawn anti clockwise" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -811,19 +815,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/minicad/shapes/Polygon.java">
+    <entry file="file://$PROJECT_DIR$/src/minicad/Tester.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="581">
-          <caret line="42" column="33" lean-forward="true" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
+        <state relative-caret-position="255">
+          <caret line="15" column="6" lean-forward="false" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1005#1006#0" expanded="true" />
-            <element signature="e#1034#1035#0" expanded="true" />
-            <element signature="e#1103#1104#0" expanded="true" />
-            <element signature="e#1136#1137#0" expanded="true" />
-            <element signature="e#1168#1169#0" expanded="true" />
-            <element signature="e#1231#1232#0" expanded="true" />
-            <element signature="e#1265#1266#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -849,10 +846,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/minicad/shapes/Polygon.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="16" column="41" lean-forward="false" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+        <state relative-caret-position="581">
+          <caret line="42" column="33" lean-forward="true" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1005#1006#0" expanded="true" />
+            <element signature="e#1034#1035#0" expanded="true" />
+            <element signature="e#1103#1104#0" expanded="true" />
+            <element signature="e#1136#1137#0" expanded="true" />
+            <element signature="e#1168#1169#0" expanded="true" />
+            <element signature="e#1231#1232#0" expanded="true" />
+            <element signature="e#1265#1266#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/minicad/Canvas.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="280" column="43" lean-forward="false" selection-start-line="280" selection-start-column="43" selection-end-line="280" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -869,20 +883,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/minicad/Tester.java">
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="6" lean-forward="false" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/minicad/Canvas.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="63" column="24" lean-forward="false" selection-start-line="63" selection-start-column="15" selection-end-line="63" selection-end-column="24" />
+        <state relative-caret-position="270">
+          <caret line="16" column="39" lean-forward="true" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
