@@ -20,6 +20,8 @@ public final class Canvas implements Drawing {
     private BufferedImage fillSurface = null;
     private ArrayList<Shape> shapes = null;
 
+    private int count = 0;
+
     public Canvas(final int width, final int height, final String color, final int alpha) {
         initCanvas(width, height, color, alpha);
     }
@@ -194,58 +196,46 @@ public final class Canvas implements Drawing {
                         + " " + cornerSE.x + " " + cornerSE.y
                         + " " + Utils.getHexAndAlpha(shape.getBorderColor())).accept(this);
 
-        floodFill(shape.getCenter(width, height), shape.getFillColor());
+        if (cornerNW.x != width - 1 && cornerNW.y != height - 1) {
+            floodFill(shape.getCenter(width, height), shape.getFillColor());
+        }
+    }
+
+
+    private void drawCircleHelper(final Queue<Point> points, final Point pos,
+                                  final int x, final int y) {
+        points.add(new Point(pos.x + x, pos.y + y));
+        points.add(new Point(pos.x - x, pos.y + y));
+        points.add(new Point(pos.x + x, pos.y - y));
+        points.add(new Point(pos.x - x, pos.y - y));
+        points.add(new Point(pos.x + y, pos.y + x));
+        points.add(new Point(pos.x - y, pos.y + x));
+        points.add(new Point(pos.x + y, pos.y - x));
+        points.add(new Point(pos.x - y, pos.y - x));
     }
 
     @Override
     public void draw(final Circle shape) {
         fillSurface = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Point current = new Point(shape.getStart());
+        Queue<Point> points = new LinkedList<>();
 
         int radius = shape.getRadius();
+        int x = 0, y = radius;
+        int d = 3 - 2 * radius;
 
-        int x = radius;
-        int y = 0;
+        while (y >= x) {
+            drawCircleHelper(points, current, x, y);
+            x++;
 
-        Queue<Point> points = new LinkedList<>();
-        points.add(new Point(current.x + x, current.y + y));
-
-        points.add(new Point(current.x, current.y - x));
-        points.add(new Point(current.x - x, current.y));
-
-        if (radius > 0) {
-            points.add(new Point(current.x + x, current.y - y));
-            points.add(new Point(current.y + y, current.x + x));
-            points.add(new Point(current.y - y, current.x + x));
-        }
-
-        int p = 1 - radius;
-
-        while (x > y) {
-            y++;
-
-            if (p <= 0) {
-                p = p + 2 * y + 1;
+            if (d > 0) {
+                y--;
+                d = d + 4 * (x - y) + 10;
             } else {
-                x--;
-                p = p + 2 * y - 2 * x + 1;
+                d = d + 4 * x + 6;
             }
 
-            if (x < y) {
-                break;
-            }
-
-            points.add(new Point(current.x + x, current.y + y));
-            points.add(new Point(current.x - x, current.y + y));
-            points.add(new Point(current.x + x, current.y - y));
-            points.add(new Point(current.x - x, current.y - y));
-
-            if (x != y) {
-                points.add(new Point(current.y + y, current.x + x));
-                points.add(new Point(current.y - y, current.x + x));
-                points.add(new Point(current.y + y, current.x - x));
-                points.add(new Point(current.y - y, current.x - x));
-            }
+            drawCircleHelper(points, current, x, y);
         }
 
         while (!points.isEmpty()) {
@@ -279,6 +269,9 @@ public final class Canvas implements Drawing {
     public void drawAll() {
         for (Shape shape : shapes) {
             shape.accept(this);
+
+//            System.out.println(count + " " + shape);
+//            Utils.print(surface, "debug-" + (count++) + ".png");
         }
     }
 }

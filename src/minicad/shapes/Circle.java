@@ -50,4 +50,11 @@ public final class Circle implements Shape {
     public void accept(final Drawing drawing) {
         drawing.draw(this);
     }
+
+    public String toString() {
+        return "CIRCLE" + " " + start.x + " " + start.y
+                + " " + radius
+                + " " + Utils.getHexAndAlpha(fillColor)
+                + " " + Utils.getHexAndAlpha(borderColor);
+    }
 }

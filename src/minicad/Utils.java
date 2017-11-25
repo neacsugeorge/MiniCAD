@@ -45,8 +45,8 @@ public final class Utils {
         return result.toString();
     }
 
-    public static void print(final BufferedImage surface) {
-        File outputFile = new File("debug.png");
+    public static void print(final BufferedImage surface, final String filename) {
+        File outputFile = new File(filename);
         try {
             ImageIO.write(surface, "png", outputFile);
         } catch (IOException e) {
