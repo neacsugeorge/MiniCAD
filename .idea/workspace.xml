@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b13b1b67-a098-4465-9c5e-d798a7cddaea" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/README" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MiniCADMakefile" afterPath="$PROJECT_DIR$/src/MiniCADMakefile" />
     </list>
@@ -121,17 +120,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MiniCADMakefile" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MiniCADMakefile" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MiniCADMakefile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state relative-caret-position="102">
+              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/README">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="748">
@@ -184,8 +183,8 @@
         <option value="$PROJECT_DIR$/src/minicad/Tester.java" />
         <option value="$PROJECT_DIR$/src/minicad/Canvas.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/MiniCADMakefile" />
         <option value="$PROJECT_DIR$/src/README" />
+        <option value="$PROJECT_DIR$/src/MiniCADMakefile" />
       </list>
     </option>
   </component>
@@ -426,7 +425,7 @@
       <workItem from="1511375994727" duration="15268000" />
       <workItem from="1511398210657" duration="28266000" />
       <workItem from="1511554788956" duration="19752000" />
-      <workItem from="1511685424763" duration="2144000" />
+      <workItem from="1511685424763" duration="3266000" />
     </task>
     <task id="LOCAL-00001" summary="Init basic canvas with color">
       <created>1511397307794</created>
@@ -484,11 +483,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511630477739</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Clean rule in Makefile; Finished README for this homework;">
+      <created>1511687624209</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1511687624209</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73512000" />
+    <option name="totallyTimeSpent" value="74634000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="16" y="-6" width="1920" height="1061" extended-state="6" />
@@ -541,7 +547,8 @@
     <MESSAGE value="Passed the tests for circle" />
     <MESSAGE value="Passed 39/40 tests. Working Triangle, Diamond &amp; Polygon" />
     <MESSAGE value="Passed all tests. Diamond should be drawn anti clockwise" />
-    <option name="LAST_COMMIT_MESSAGE" value="Passed all tests. Diamond should be drawn anti clockwise" />
+    <MESSAGE value="Clean rule in Makefile; Finished README for this homework;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Clean rule in Makefile; Finished README for this homework;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -960,14 +967,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MiniCADMakefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/minicad/Canvas.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3672">
@@ -1002,6 +1001,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="748">
           <caret line="44" column="57" lean-forward="false" selection-start-line="44" selection-start-column="57" selection-end-line="44" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MiniCADMakefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
