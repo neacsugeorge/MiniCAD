@@ -3,3 +3,5 @@ C=javac
 build:
 	$C -g Main.java
 
+clean:
+    find . -name "*.class" -type f -delete

@@ -1,0 +1,45 @@
+Tema 2 - MiniCAD
+Neacsu George - 321CD
+
+Am implementat Visitor Pattern, astfel avem interfetele Drawing (Visitor)
+si Shape (Visitable). Avem apoi cate o clasa pentru fiecare forma si, respectiv,
+o clasa pentru Canvas.
+
+Singleton Pattern si Factory Pattern se regasesc in clasa ShapeGenerator,
+clasa care se ocupa cu instantierea formelor. Instantierea se face utilizand
+Reflection API, pe baza unui string obtin constructorul cu un parametru de tip
+String[] si il apelez corespunzator. In fiecare clasa pentru o forma, am pus constante
+pentru pozitiile in array ale parametrilor (planul initial a fost sa evit checkstyle
+warnings, dar acum ca ma gandesc, e un improvement deoarece una e sa ai ceva de
+genu params[2] si alta e sa ai params[COLOR]).
+
+Aproape toata logica de desenare a formelor se afla in Visitor (Canvas), cu exceptia
+unor functii utilitare care se afla in clasa Utils sau in anumite forme. Spre
+exemplu, am folosit (desi nu era absolut necesar) floodFill si in formele Square si
+Rectangle desi se putea face fill iterativ pornind din pozitia de start + (1,1).
+
+In clasa canvas se deseneaza de fapt doar forme de tip Line si Circle. Restul fiind
+de fapt cazuri particulare ale acestor 2 forme. Square e caz particular de Rectangle,
+iar Rectangle e format din 4 * Line. Circle e independent, aplicand algoritmul de
+desenare a cercurilor al lui Bresenham. Triangle, Diamond sunt cazuri particulare de
+Polygon, iar Polygon din nou este format din N * Line. Presupun ca in final, dupa ce
+am implementat Polygon, puteam sa inlocuiesc si implementarea de la Square & Rectangle
+doar ca in desenarea acestora, exista posibilitatea ca acel centru de greutate sa nu
+fie in interiorului canvas-ului, astfel nu am mai stat sa ma chinui (din lipsa de timp).
+La polygon am fost nevoit sa implementez in clasa Utils 2 functii, acelea de calcularea
+centrului de greutate (aria unui poligon si centrul de greutate).
+
+FloodFill-ul e facut cu o coada. De asemenea, este de specificat faptul ca, floodfill-ul
+este apelat pe o suprafata "curata" de fiecare data si in acelasi timp se face fill si pe
+suprafata ce este salvata. Asta deoarece la suprapunerea unor forme se vrea ca ultima forma
+sa fie deasupra si daca am face flood fill pe aceeasi suprafata, in unele cazuri forma nu s-ar
+umple complet sau ar aparea alte probleme.
+
+Avem si o clasa Utils care are metode ce fac:
+Conversia din String(Hex) + int(Alpha) intr-un int(RGBA Color)
+Conversia inversa, dintr-un int(RGBA Color) intr-un String("#<Hex> <Alpha>")
+Aflarea centrului de greutate pentru un poligon cu N puncte
+Aflarea ariei pentru un poligon cu N puncte
+Salvarea unui BufferedImage intr-un fisier PNG (utilizata la debugging)
+
+Avem si o clasa Tester care a fost folosita la debugging.
